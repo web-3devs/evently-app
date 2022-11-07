@@ -2,50 +2,56 @@ import React, { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
   ScrollView,
-  TouchableOpacity,
   View,
-  KeyboardAvoidingView,
   Image,
   ToastAndroid,
+  ImageBackground,
 } from "react-native";
 
-import {
-  Layout,
-  Text,
-  TextInput,
-  Button,
-  useTheme,
-  themeColor,
-  TopNav,
-} from "react-native-rapi-ui";
+import { Layout, Text, TextInput, Button, TopNav } from "react-native-rapi-ui";
 
-export default function Login() {
+export default function Login({ navigation }: any) {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
+  const handleLogin = async () => {
+    // if (!email) {
+    //   ToastAndroid.show("Please enter email", ToastAndroid.SHORT);
+    //   return;
+    // }
+    // if (!password) {
+    //   ToastAndroid.show("Please enter password", ToastAndroid.SHORT);
+    //   return;
+    // }
+    navigation.navigate("Home");
+  };
+
   return (
-    <KeyboardAvoidingView behavior="height" enabled style={{ flex: 1 }}>
-      <Layout>
-        <TopNav
-          leftContent={
-            <Image
-              source={require("../assets/logo.png")}
-              style={{ height: 40, width: 120 }}
-            />
-          }
-        />
-        <ScrollView
-          contentContainerStyle={{
-            flexGrow: 1,
-          }}
+    <Layout>
+      <TopNav
+        leftContent={
+          <Image
+            source={require("../assets/logo.png")}
+            style={{ height: 40, width: 120 }}
+          />
+        }
+      />
+      <StatusBar style="dark" backgroundColor="white" />
+      <ScrollView
+        contentContainerStyle={{
+          flexGrow: 1,
+        }}
+      >
+        <ImageBackground
+          source={require("../assets/Mesh.png")}
+          style={{ width: "100%", height: "100%" }}
         >
           <View
             style={{
               flex: 1,
               justifyContent: "center",
               alignItems: "center",
-              backgroundColor: themeColor.white100,
             }}
           >
             <Image
@@ -54,28 +60,17 @@ export default function Login() {
                 height: 220,
                 width: 220,
               }}
-              source={require("../assets/mob.png")}
+              source={require("../assets/mob1.png")}
             />
           </View>
+
           <View
             style={{
               flex: 3,
               paddingHorizontal: 20,
               paddingBottom: 20,
-              backgroundColor: themeColor.white,
             }}
           >
-            <Text
-              fontWeight="bold"
-              style={{
-                alignSelf: "center",
-                padding: 30,
-              }}
-              size="h3"
-            >
-              Login
-            </Text>
-
             <Text style={{ fontWeight: "700" }}>Email</Text>
             <TextInput
               containerStyle={{ marginTop: 15 }}
@@ -113,11 +108,12 @@ export default function Login() {
                 marginTop: 20,
                 elevation: 4,
               }}
+              onPress={handleLogin}
               disabled={loading}
             />
           </View>
-        </ScrollView>
-      </Layout>
-    </KeyboardAvoidingView>
+        </ImageBackground>
+      </ScrollView>
+    </Layout>
   );
 }
