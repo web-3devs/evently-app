@@ -1,24 +1,22 @@
-import React, { useState } from "react";
-import { StatusBar } from "expo-status-bar";
-import {
-  ScrollView,
-  View,
-  Image,
-  ToastAndroid,
-  ImageBackground,
-} from "react-native";
+import React from "react";
+import { View, Image } from "react-native";
+import { Text, Button } from "react-native-rapi-ui";
+import { Feather } from "@expo/vector-icons";
 
-import {
-  Layout,
-  Text,
-  TextInput,
-  Button,
-  TopNav,
-  Avatar,
-} from "react-native-rapi-ui";
-import { Feather, Ionicons } from "@expo/vector-icons";
-
-export default function EventCard({ route, name, desc, img_url, date }: any) {
+type EventCardProps = {
+  route: any;
+  id: string;
+  name: string;
+  desc: string;
+  img_url: string;
+};
+export default function EventCard({
+  route,
+  id,
+  name,
+  desc,
+  img_url,
+}: EventCardProps): React.ReactElement {
   return (
     <View
       style={{
@@ -43,7 +41,7 @@ export default function EventCard({ route, name, desc, img_url, date }: any) {
       >
         <Image
           source={{
-            uri: "https://res.cloudinary.com/djkwixcg8/image/upload/v1666505377/oerxhzidqaocuafgbmtj.jpg",
+            uri: img_url,
           }}
           style={{
             height: 150,
@@ -59,14 +57,17 @@ export default function EventCard({ route, name, desc, img_url, date }: any) {
           <Text>25 Oct 2022</Text>
         </View>
         <Text>{name}</Text>
-        <Text>Event Desc</Text>
+        <Text>{desc}</Text>
       </View>
       <Button
         text="Start Check-in"
         color={"#805AD5"}
         rightContent={<Feather name="arrow-right" color={"white"} size={20} />}
         onPress={() => {
-          route.navigate("SingleEvent");
+          route.navigate("SingleEvent", {
+            event_id: id,
+            event_name: name,
+          });
         }}
         textStyle={{ color: "white" }}
         style={{

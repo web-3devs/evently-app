@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
   ScrollView,
@@ -6,24 +6,29 @@ import {
   Image,
   ToastAndroid,
   ImageBackground,
+  Platform,
 } from "react-native";
-
 import { Layout, Text, TextInput, Button, TopNav } from "react-native-rapi-ui";
 
-export default function Login({ navigation }: any) {
+export default function Login({ navigation }: any): React.ReactElement {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleLogin = async () => {
-    // if (!email) {
-    //   ToastAndroid.show("Please enter email", ToastAndroid.SHORT);
-    //   return;
-    // }
-    // if (!password) {
-    //   ToastAndroid.show("Please enter password", ToastAndroid.SHORT);
-    //   return;
-    // }
+    if (!email) {
+       if (Platform.OS ==="android") {
+        ToastAndroid.show("Please enter E-Mail", ToastAndroid.SHORT);
+        return;
+      }
+    }
+    if (!password) {
+      if (Platform.OS ==="android") {
+        ToastAndroid.show("Please enter password", ToastAndroid.SHORT);
+        return;
+      }
+    }
+    // Call API and do some magic here
     navigation.navigate("Home");
   };
 
@@ -63,7 +68,6 @@ export default function Login({ navigation }: any) {
               source={require("../assets/mob1.png")}
             />
           </View>
-
           <View
             style={{
               flex: 3,

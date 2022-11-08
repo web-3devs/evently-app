@@ -65,12 +65,38 @@ export default function Events({ navigation }: any) {
         >
           {allEvents
             ? allEvents.map((item: any) => {
-                return <EventCard route={navigation} name={item.name} />;
+                return (
+                  <EventCard
+                    route={navigation}
+                    name={item.name}
+                    desc={""}
+                    id={""}
+                    img_url={""}
+                  />
+                );
               })
             : null}
-          <EventCard route={navigation} />
-          <EventCard route={navigation} />
-          <EventCard route={navigation} />
+          <EventCard
+            route={navigation}
+            name={""}
+            desc={""}
+            id={""}
+            img_url={""}
+          />
+          <EventCard
+            route={navigation}
+            name={""}
+            desc={""}
+            id={""}
+            img_url={""}
+          />
+          <EventCard
+            route={navigation}
+            name={""}
+            desc={""}
+            id={""}
+            img_url={""}
+          />
         </ScrollView>
       </ImageBackground>
     </Layout>
