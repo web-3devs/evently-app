@@ -21,30 +21,30 @@ export default function EventCard({
     <View
       style={{
         width: "100%",
-        height: "auto",
-        borderColor: "black",
-        borderWidth: 1,
-        borderRadius: 5,
-        justifyContent: "center",
+        flex: 1,
+        justifyContent: "flex-start",
         alignItems: "center",
         marginVertical: 10,
       }}
     >
+      <Text style={{ fontSize: 28, fontWeight: "900", marginVertical: 10 }}>
+        Here's your latest event
+      </Text>
       <View
         style={{
           width: "100%",
           justifyContent: "center",
           alignItems: "center",
-          borderBottomColor: "black",
-          borderBottomWidth: 1,
         }}
       >
         <Image
           source={{
-            uri: img_url,
+            uri:
+              img_url ||
+              "https://notes.webutvikling.org/static/283331d58b294ab05c1491be3436600e/5d2c5/nextjs.png",
           }}
           style={{
-            height: 150,
+            height: 200,
             width: "100%",
             resizeMode: "cover",
             borderRadius: 5,
@@ -54,10 +54,15 @@ export default function EventCard({
       <View style={{ justifyContent: "flex-end", width: "100%", padding: 10 }}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <Feather name="calendar" />
-          <Text>25 Oct 2022</Text>
+          <Text style={{ fontSize: 20, fontWeight: "600" }}>25 Oct 2022</Text>
         </View>
-        <Text>{name}</Text>
-        <Text>{desc}</Text>
+        <Text style={{ fontSize: 24, fontWeight: "700" }}>
+          {name || "NextJS Bootcamp"}
+        </Text>
+        <Text style={{ fontSize: 18, fontWeight: "100" }}>
+          {desc ||
+            "Learn all about NextJS and build 4 projects,code and deploy on vercel:The Platform by creators of NextJS to easily deploy and manage NextJS"}
+        </Text>
       </View>
       <Button
         text="Start Check-in"
@@ -74,7 +79,7 @@ export default function EventCard({
           alignSelf: "stretch",
           width: "100%",
           marginTop: 20,
-          elevation: 10,
+          elevation: 4,
           borderRadius: 1,
         }}
       />

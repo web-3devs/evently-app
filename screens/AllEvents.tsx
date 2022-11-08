@@ -58,38 +58,9 @@ export default function Events({ navigation }: any) {
         <ScrollView
           contentContainerStyle={{
             flexGrow: 1,
-            paddingHorizontal: 15,
-            paddingVertical: 10,
-            paddingBottom: 80,
+            padding:10
           }}
         >
-          {allEvents
-            ? allEvents.map((item: any) => {
-                return (
-                  <EventCard
-                    route={navigation}
-                    name={item.name}
-                    desc={""}
-                    id={""}
-                    img_url={""}
-                  />
-                );
-              })
-            : null}
-          <EventCard
-            route={navigation}
-            name={""}
-            desc={""}
-            id={""}
-            img_url={""}
-          />
-          <EventCard
-            route={navigation}
-            name={""}
-            desc={""}
-            id={""}
-            img_url={""}
-          />
           <EventCard
             route={navigation}
             name={""}

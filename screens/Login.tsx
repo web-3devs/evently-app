@@ -1,4 +1,4 @@
-import React, {useState } from "react";
+import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
   ScrollView,
@@ -16,18 +16,18 @@ export default function Login({ navigation }: any): React.ReactElement {
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleLogin = async () => {
-    if (!email) {
-       if (Platform.OS ==="android") {
-        ToastAndroid.show("Please enter E-Mail", ToastAndroid.SHORT);
-        return;
-      }
-    }
-    if (!password) {
-      if (Platform.OS ==="android") {
-        ToastAndroid.show("Please enter password", ToastAndroid.SHORT);
-        return;
-      }
-    }
+    // if (!email) {
+    //    if (Platform.OS ==="android") {
+    //     ToastAndroid.show("Please enter E-Mail", ToastAndroid.SHORT);
+    //     // return;
+    //   }
+    // }
+    // if (!password) {
+    //   if (Platform.OS ==="android") {
+    //     ToastAndroid.show("Please enter password", ToastAndroid.SHORT);
+    //     // return;
+    //   }
+    // }
     // Call API and do some magic here
     navigation.navigate("Home");
   };

@@ -1,7 +1,10 @@
 import Login from "./screens/Login";
 import { ThemeProvider } from "react-native-rapi-ui";
 import Events from "./screens/AllEvents";
-import { createStackNavigator } from "@react-navigation/stack";
+import {
+  CardStyleInterpolators,
+  createStackNavigator,
+} from "@react-navigation/stack";
 import Profile from "./screens/Profile";
 import { NavigationContainer } from "@react-navigation/native";
 import SingleEvent from "./screens/SingleEvent";
@@ -16,12 +19,19 @@ export default function App() {
           <Stack.Screen
             name="Login"
             component={Login}
-            options={{ headerShown: false }}
+            options={{
+              headerShown: false,
+            }}
           />
           <Stack.Screen
             name="Home"
             component={Events}
-            options={{ headerShown: false }}
+            options={{
+              headerShown: false,
+              gestureEnabled: true,
+              gestureDirection:"horizontal",
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+            }}
           />
           <Stack.Screen
             name="Profile"
