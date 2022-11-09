@@ -83,6 +83,7 @@ export default function Login({ navigation }: any): React.ReactElement {
               placeholderTextColor="black"
               borderColor={"black"}
               borderWidth={1}
+              borderRadius={4}
               autoCapitalize="none"
               autoCorrect={false}
               keyboardType="email-address"
@@ -97,6 +98,7 @@ export default function Login({ navigation }: any): React.ReactElement {
               placeholderTextColor="black"
               borderColor={"black"}
               borderWidth={1}
+              borderRadius={4}
               autoCapitalize="none"
               autoCorrect={false}
               secureTextEntry={true}
@@ -104,13 +106,13 @@ export default function Login({ navigation }: any): React.ReactElement {
             />
             <Button
               text={loading ? "Loading" : "Login"}
-              color={"white"}
-              textStyle={{ color: "black" }}
+              color={"#9F7AEA"}
+              textStyle={{ color: "white" }}
               style={{
+                borderRadius: 4,
                 borderColor: "black",
                 borderWidth: 1,
-                marginTop: 20,
-                elevation: 4,
+                marginTop: 32,
               }}
               onPress={handleLogin}
               disabled={loading}

@@ -9,6 +9,7 @@ import Profile from "./screens/Profile";
 import { NavigationContainer } from "@react-navigation/native";
 import SingleEvent from "./screens/SingleEvent";
 import { Image } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -29,7 +30,7 @@ export default function App() {
             options={{
               headerShown: false,
               gestureEnabled: true,
-              gestureDirection:"horizontal",
+              gestureDirection: "horizontal",
               cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
             }}
           />

@@ -27,7 +27,7 @@ export default function SingleEvent(): React.ReactElement {
         name="Settings"
         component={ParticipentsList}
         options={{
-          tabBarLabel: "Participents",
+          tabBarLabel: "Participents (80)",
         }}
       />
     </Tab.Navigator>

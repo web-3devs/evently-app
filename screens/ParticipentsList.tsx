@@ -14,10 +14,11 @@ const ParticipentsList = () => {
         placeholder="Search Participent"
         placeholderTextColor="black"
         borderColor={"black"}
+        borderRadius={4}
         borderWidth={1}
         autoCapitalize="none"
         leftContent={<Feather name="search" size={20} color="grey" />}
-        rightContent={<Text style={{ color: "grey" }}>Total:80</Text>}
+        // rightContent={<Text style={{ color: "grey" }}>Total:80</Text>}
         autoCorrect={false}
         keyboardType="default"
       />

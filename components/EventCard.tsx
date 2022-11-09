@@ -10,6 +10,7 @@ type EventCardProps = {
   desc: string;
   img_url: string;
 };
+
 export default function EventCard({
   route,
   id,
@@ -24,12 +25,11 @@ export default function EventCard({
         flex: 1,
         justifyContent: "flex-start",
         alignItems: "center",
-        marginVertical: 10,
       }}
     >
-      <Text style={{ fontSize: 28, fontWeight: "900", marginVertical: 10 }}>
+      {/* <Text style={{ fontSize: 28, fontWeight: "900", marginVertical: 10 }}>
         Here's your latest event
-      </Text>
+      </Text> */}
       <View
         style={{
           width: "100%",
@@ -52,14 +52,14 @@ export default function EventCard({
         />
       </View>
       <View style={{ justifyContent: "flex-end", width: "100%", padding: 10 }}>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Feather name="calendar" />
-          <Text style={{ fontSize: 20, fontWeight: "600" }}>25 Oct 2022</Text>
+        <View style={{ flexDirection: "row", alignItems: "center", marginVertical: 12 }}>
+          <Feather name="calendar" style={{ fontSize: 24 }} />
+          <Text style={{ fontSize: 16, fontWeight: "600", marginLeft: 4 }} >25 Oct 2022</Text>
         </View>
-        <Text style={{ fontSize: 24, fontWeight: "700" }}>
+        <Text style={{ fontSize: 24, fontWeight: "bold", marginBottom: 8 }}>
           {name || "NextJS Bootcamp"}
         </Text>
-        <Text style={{ fontSize: 18, fontWeight: "100" }}>
+        <Text style={{ fontSize: 16, color: 'gray', textAlign: 'justify' }}>
           {desc ||
             "Learn all about NextJS and build 4 projects,code and deploy on vercel:The Platform by creators of NextJS to easily deploy and manage NextJS"}
         </Text>
@@ -76,8 +76,9 @@ export default function EventCard({
         }}
         textStyle={{ color: "white" }}
         style={{
-          alignSelf: "stretch",
-          width: "100%",
+          position: 'absolute',
+          bottom: 130,
+          minWidth: '100%',
           marginTop: 20,
           elevation: 4,
           borderRadius: 1,

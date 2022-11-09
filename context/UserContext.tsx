@@ -1,4 +1,5 @@
 import React, { createContext } from "react";
+
 type User = {
   id: string;
   username: string;

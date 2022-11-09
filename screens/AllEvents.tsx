@@ -18,6 +18,7 @@ import {
 } from "react-native-rapi-ui";
 import { Feather } from "@expo/vector-icons";
 import EventCard from "../components/EventCard";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Events({ navigation }: any) {
   const [allEvents, setAllEvents] = useState<any>([]);
@@ -27,9 +28,9 @@ export default function Events({ navigation }: any) {
       console.log(allEvents);
     });
   }, []);
-  const fetchAllEvents = async () => {};
+  const fetchAllEvents = async () => { };
   return (
-    <Layout>
+    <SafeAreaView>
       <TopNav
         leftContent={
           <Image
@@ -58,7 +59,6 @@ export default function Events({ navigation }: any) {
         <ScrollView
           contentContainerStyle={{
             flexGrow: 1,
-            padding:10
           }}
         >
           <EventCard
@@ -70,6 +70,6 @@ export default function Events({ navigation }: any) {
           />
         </ScrollView>
       </ImageBackground>
-    </Layout>
+    </SafeAreaView>
   );
 }
