@@ -20,12 +20,12 @@ import { Feather } from "@expo/vector-icons";
 import EventCard from "../components/EventCard";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function Events({ navigation }: any) {
+export default function Events({ navigation ,route}: any) {
   const [allEvents, setAllEvents] = useState<any>([]);
+  const event = route.params.eventdata;
   useEffect(() => {
     fetchAllEvents().then((res) => {
       setAllEvents(res);
-      console.log(allEvents);
     });
   }, []);
   const fetchAllEvents = async () => { };
@@ -63,10 +63,10 @@ export default function Events({ navigation }: any) {
         >
           <EventCard
             route={navigation}
-            name={""}
-            desc={""}
-            id={""}
-            img_url={""}
+            name={event.name}
+            desc={event.description}
+            id={event.id}
+            img_url={event.image}
           />
         </ScrollView>
       </ImageBackground>

@@ -31,6 +31,7 @@ export default function App() {
               headerShown: false,
               gestureEnabled: true,
               gestureDirection: "horizontal",
+              gestureResponseDistance: 200,
               cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
             }}
           />

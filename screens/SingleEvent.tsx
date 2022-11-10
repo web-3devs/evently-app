@@ -11,6 +11,7 @@ export default function SingleEvent(): React.ReactElement {
         tabBarLabelStyle: { fontSize: 12, fontWeight: "800" },
         tabBarItemStyle: { height: 50 },
         tabBarActiveTintColor: "black",
+        tabBarPressColor: "#9F7AEA",
         tabBarIndicatorStyle: {
           backgroundColor: "black",
         },

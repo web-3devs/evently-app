@@ -46,20 +46,28 @@ export default function EventCard({
           style={{
             height: 200,
             width: "100%",
-            resizeMode: "cover",
+            resizeMode: "contain",
             borderRadius: 5,
           }}
         />
       </View>
       <View style={{ justifyContent: "flex-end", width: "100%", padding: 10 }}>
-        <View style={{ flexDirection: "row", alignItems: "center", marginVertical: 12 }}>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            marginVertical: 12,
+          }}
+        >
           <Feather name="calendar" style={{ fontSize: 24 }} />
-          <Text style={{ fontSize: 16, fontWeight: "600", marginLeft: 4 }} >25 Oct 2022</Text>
+          <Text style={{ fontSize: 16, fontWeight: "600", marginLeft: 4 }}>
+            25 Oct 2022
+          </Text>
         </View>
         <Text style={{ fontSize: 24, fontWeight: "bold", marginBottom: 8 }}>
           {name || "NextJS Bootcamp"}
         </Text>
-        <Text style={{ fontSize: 16, color: 'gray', textAlign: 'justify' }}>
+        <Text style={{ fontSize: 16, color: "gray", textAlign: "justify" }}>
           {desc ||
             "Learn all about NextJS and build 4 projects,code and deploy on vercel:The Platform by creators of NextJS to easily deploy and manage NextJS"}
         </Text>
@@ -76,9 +84,9 @@ export default function EventCard({
         }}
         textStyle={{ color: "white" }}
         style={{
-          position: 'absolute',
+          position: "absolute",
           bottom: 130,
-          minWidth: '100%',
+          minWidth: "100%",
           marginTop: 20,
           elevation: 4,
           borderRadius: 1,

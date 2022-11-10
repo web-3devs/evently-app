@@ -16,20 +16,40 @@ export default function Login({ navigation }: any): React.ReactElement {
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleLogin = async () => {
-    // if (!email) {
-    //    if (Platform.OS ==="android") {
-    //     ToastAndroid.show("Please enter E-Mail", ToastAndroid.SHORT);
-    //     // return;
-    //   }
-    // }
-    // if (!password) {
-    //   if (Platform.OS ==="android") {
-    //     ToastAndroid.show("Please enter password", ToastAndroid.SHORT);
-    //     // return;
-    //   }
-    // }
-    // Call API and do some magic here
-    navigation.navigate("Home");
+    if (!email) {
+      if (Platform.OS === "android") {
+        ToastAndroid.show("Please enter E-Mail", ToastAndroid.SHORT);
+        // return;
+      }
+    }
+    if (!password) {
+      if (Platform.OS === "android") {
+        ToastAndroid.show("Please enter password", ToastAndroid.SHORT);
+        // return;
+      }
+    }
+    try {
+      let headersList = {
+        "Content-type": "application/json",
+      };
+      const URL = "https://evently-delta.vercel.app/api/checkin";
+      let data = await fetch(URL, {
+        method: "POST",
+        headers: headersList,
+        body: JSON.stringify({
+          username: email,
+          password: password,
+        }),
+      });
+      let jsondata = await data.json();
+      console.log(jsondata.isFound[0].events);
+
+      if (data.ok) {
+        navigation.navigate("Home", {
+          eventdata: jsondata.isFound[0].events,
+        });
+      }
+    } catch (err) {}
   };
 
   return (
