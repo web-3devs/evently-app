@@ -3,7 +3,9 @@ import React from "react";
 import ParticipentListItem from "../components/ParticipentListItem";
 import { TextInput } from "react-native-rapi-ui";
 import { Feather } from "@expo/vector-icons";
+import { useStateValue } from "../context/ParticipentContext";
 const ParticipentsList = () => {
+  const [{ participents }, dispatch] = useStateValue();
   return (
     <ImageBackground
       source={require("../assets/Mesh.png")}
@@ -28,18 +30,18 @@ const ParticipentsList = () => {
           padding: 10,
         }}
       >
-        <ParticipentListItem />
-        <ParticipentListItem />
-        <ParticipentListItem />
-        <ParticipentListItem />
-        <ParticipentListItem />
-        <ParticipentListItem />
-        <ParticipentListItem />
-        <ParticipentListItem />
-        <ParticipentListItem />
-        <ParticipentListItem />
-        <ParticipentListItem />
-        <ParticipentListItem />
+        {participents.map((item: any) => {
+          return item.participants.map((p: any) => {
+            return (
+              <ParticipentListItem
+                key={p.id}
+                name={p.name}
+                email={p.email}
+                p_id={p.id}
+              />
+            );
+          });
+        })}
       </ScrollView>
     </ImageBackground>
   );

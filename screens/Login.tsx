@@ -11,12 +11,14 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Layout, Text, TextInput, Button, TopNav } from "react-native-rapi-ui";
+import { useStateValue } from "../context/ParticipentContext";
+import { actionTypes } from "../context/reducer";
 
 export default function Login({ navigation }: any): React.ReactElement {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-
+  const [{}, dispatch] = useStateValue();
   const handleLogin = async () => {
     if (!email) {
       if (Platform.OS === "android") {
@@ -45,12 +47,15 @@ export default function Login({ navigation }: any): React.ReactElement {
         }),
       });
       let jsondata = await data.json();
-      console.log(jsondata);
       if (data.ok) {
         setLoading(false);
+        dispatch({
+          type: actionTypes.SET_PARTICIPENTS,
+          participents: jsondata.event_data,
+        });
         navigation.navigate("Home", {
           eventdata: jsondata.isFound[0].events,
-          participents:jsondata.event_data
+          participents: jsondata.event_data,
         });
       }
     } catch (err) {}

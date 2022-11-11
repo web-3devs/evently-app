@@ -26,19 +26,21 @@ const Scanner = (): React.ReactElement => {
           headers: headersList,
         }
       );
-      let data = await response.text();
-      console.log(data);
       console.log(response.status);
-      
-      if (response.status) {
-        ToastAndroid.show("Already Checked-in", ToastAndroid.SHORT);
+
+      if (response.status === 406) {
+        ToastAndroid.show("Already andar hai tu", ToastAndroid.SHORT);
+        setParticipent_name("");
+        setIsScanned((prev) => !prev);
+        return;
       }
       if (response.ok) {
         ToastAndroid.show("Succesfully checkedin", ToastAndroid.SHORT);
+        setParticipent_name("");
+        setIsScanned((prev) => !prev);
+        return;
       }
     }
-    setParticipent_name("");
-    setIsScanned((prev) => !prev);
   };
 
   return (
@@ -49,8 +51,8 @@ const Scanner = (): React.ReactElement => {
       {!isScanned && (
         <BarCodeScanner
           style={{
-            top: 45,
-            height: 400,
+            top: 50,
+            height: 460,
             width: SCREEN_WIDTH,
           }}
           onBarCodeScanned={(data) => {
