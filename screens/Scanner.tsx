@@ -1,4 +1,4 @@
-import { ImageBackground, Dimensions, View } from "react-native";
+import { ImageBackground, Dimensions, View, ToastAndroid } from "react-native";
 import React, { useState } from "react";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { Button, Text } from "react-native-rapi-ui";
@@ -7,9 +7,37 @@ const { width: SCREEN_WIDTH } = Dimensions.get("window");
 const Scanner = (): React.ReactElement => {
   const [isScanned, setIsScanned] = useState<boolean>(false);
   const [participent_name, setParticipent_name] = useState<string>("");
-
+  const [p_id, setP_id] = useState<string>("");
   const registerParticipent = async () => {
-    setParticipent_name('');
+    if (p_id.length > 0) {
+      let headersList = {
+        "Content-Type": "application/json",
+      };
+
+      let bodyContent = JSON.stringify({
+        participent_id: p_id,
+      });
+
+      let response = await fetch(
+        "https://eventli.vercel.app/api/markAttandence",
+        {
+          method: "POST",
+          body: bodyContent,
+          headers: headersList,
+        }
+      );
+      let data = await response.text();
+      console.log(data);
+      console.log(response.status);
+      
+      if (response.status) {
+        ToastAndroid.show("Already Checked-in", ToastAndroid.SHORT);
+      }
+      if (response.ok) {
+        ToastAndroid.show("Succesfully checkedin", ToastAndroid.SHORT);
+      }
+    }
+    setParticipent_name("");
     setIsScanned((prev) => !prev);
   };
 
@@ -30,6 +58,7 @@ const Scanner = (): React.ReactElement => {
               console.log(data.data);
               setIsScanned((prev) => !prev);
               setParticipent_name(JSON.parse(data.data).name);
+              setP_id(JSON.parse(data.data).participent_id);
             }
           }}
         />

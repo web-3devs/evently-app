@@ -20,15 +20,20 @@ import { Feather } from "@expo/vector-icons";
 import EventCard from "../components/EventCard";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function Events({ navigation ,route}: any) {
+export default function Events({ navigation, route }: any) {
   const [allEvents, setAllEvents] = useState<any>([]);
   const event = route.params.eventdata;
+  const participents = route.params.participents;
+  participents.map((_item: any) => {
+    console.log(_item.participants);
+    
+  })  
   useEffect(() => {
     fetchAllEvents().then((res) => {
       setAllEvents(res);
     });
   }, []);
-  const fetchAllEvents = async () => { };
+  const fetchAllEvents = async () => {};
   return (
     <SafeAreaView>
       <TopNav

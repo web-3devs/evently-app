@@ -7,6 +7,8 @@ import {
   ToastAndroid,
   ImageBackground,
   Platform,
+  ActivityIndicator,
+  TouchableOpacity,
 } from "react-native";
 import { Layout, Text, TextInput, Button, TopNav } from "react-native-rapi-ui";
 
@@ -19,20 +21,21 @@ export default function Login({ navigation }: any): React.ReactElement {
     if (!email) {
       if (Platform.OS === "android") {
         ToastAndroid.show("Please enter E-Mail", ToastAndroid.SHORT);
-        // return;
+        return;
       }
     }
     if (!password) {
       if (Platform.OS === "android") {
         ToastAndroid.show("Please enter password", ToastAndroid.SHORT);
-        // return;
+        return;
       }
     }
     try {
+      setLoading(true);
       let headersList = {
         "Content-type": "application/json",
       };
-      const URL = "https://evently-delta.vercel.app/api/checkin";
+      const URL = "https://eventli.vercel.app/api/checkin";
       let data = await fetch(URL, {
         method: "POST",
         headers: headersList,
@@ -42,11 +45,12 @@ export default function Login({ navigation }: any): React.ReactElement {
         }),
       });
       let jsondata = await data.json();
-      console.log(jsondata.isFound[0].events);
-
+      console.log(jsondata);
       if (data.ok) {
+        setLoading(false);
         navigation.navigate("Home", {
           eventdata: jsondata.isFound[0].events,
+          participents:jsondata.event_data
         });
       }
     } catch (err) {}
@@ -124,19 +128,33 @@ export default function Login({ navigation }: any): React.ReactElement {
               secureTextEntry={true}
               onChangeText={(text) => setPassword(text)}
             />
-            <Button
-              text={loading ? "Loading" : "Login"}
-              color={"#9F7AEA"}
-              textStyle={{ color: "white" }}
-              style={{
-                borderRadius: 4,
-                borderColor: "black",
-                borderWidth: 1,
-                marginTop: 32,
-              }}
-              onPress={handleLogin}
-              disabled={loading}
-            />
+
+            <TouchableOpacity disabled={loading} onPress={handleLogin}>
+              <View
+                style={{
+                  backgroundColor: "#9F7AEA",
+                  borderRadius: 4,
+                  borderColor: "black",
+                  borderWidth: 1,
+                  marginTop: 32,
+                  paddingVertical: 10,
+                }}
+              >
+                {loading ? (
+                  <ActivityIndicator size={"small"} color={"black"} />
+                ) : (
+                  <Text
+                    style={{
+                      textAlign: "center",
+                      color: "white",
+                      fontWeight: "800",
+                    }}
+                  >
+                    Login
+                  </Text>
+                )}
+              </View>
+            </TouchableOpacity>
           </View>
         </ImageBackground>
       </ScrollView>
