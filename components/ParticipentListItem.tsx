@@ -7,12 +7,16 @@ type ParticipentListItemProps = {
   name: string;
   email: string;
   p_id: string;
+  showSheet: any;
+  setP_name:any;
 };
 
 const ParticipentListItem = ({
   name,
   email,
   p_id,
+  showSheet,
+  setP_name,
 }: ParticipentListItemProps): React.ReactElement => {
   return (
     <View
@@ -27,6 +31,10 @@ const ParticipentListItem = ({
         borderRadius: 4,
         borderColor: "black",
         borderWidth: 1,
+      }}
+      onTouchEndCapture={() => {
+        showSheet((prev: any) => !prev);
+        setP_name(name)
       }}
     >
       <View style={{ display: "flex", flexDirection: "row" }}>

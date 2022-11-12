@@ -1,45 +1,49 @@
-import { ImageBackground, Dimensions, View, ToastAndroid } from "react-native";
+import {
+  ImageBackground,
+  Dimensions,
+  View,
+  ToastAndroid,
+  Vibration,
+  TouchableOpacity,
+  ActivityIndicator,
+} from "react-native";
 import React, { useState } from "react";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { Button, Text } from "react-native-rapi-ui";
 const { width: SCREEN_WIDTH } = Dimensions.get("window");
-
+import Checkin from "../utils/checkin";
 const Scanner = (): React.ReactElement => {
   const [isScanned, setIsScanned] = useState<boolean>(false);
   const [participent_name, setParticipent_name] = useState<string>("");
   const [p_id, setP_id] = useState<string>("");
+  const [isloading, setIsloading] = useState(false);
   const registerParticipent = async () => {
-    if (p_id.length > 0) {
-      let headersList = {
-        "Content-Type": "application/json",
-      };
-
-      let bodyContent = JSON.stringify({
-        participent_id: p_id,
-      });
-
-      let response = await fetch(
-        "https://eventli.vercel.app/api/markAttandence",
-        {
-          method: "POST",
-          body: bodyContent,
-          headers: headersList,
-        }
-      );
-      console.log(response.status);
-
-      if (response.status === 406) {
-        ToastAndroid.show("Already andar hai tu", ToastAndroid.SHORT);
+    try {
+      setIsloading(true);
+      const result = await Checkin(p_id);
+      if (result === 406) {
+        ToastAndroid.show("Already Registered", ToastAndroid.SHORT);
+        Vibration.vibrate(500);
         setParticipent_name("");
+        setP_id("");
         setIsScanned((prev) => !prev);
         return;
       }
-      if (response.ok) {
-        ToastAndroid.show("Succesfully checkedin", ToastAndroid.SHORT);
+      if (result === 200) {
+        ToastAndroid.show("Succesfully Checkedin", ToastAndroid.SHORT);
+        Vibration.vibrate();
         setParticipent_name("");
+        setP_id("");
         setIsScanned((prev) => !prev);
         return;
       }
+    } catch (err) {
+      ToastAndroid.show("Something Went Wrong,Try Again", ToastAndroid.SHORT);
+      setParticipent_name("");
+      setP_id("");
+      setIsScanned((prev) => !prev);
+    } finally {
+      setIsloading((prev) => !prev);
     }
   };
 
@@ -65,7 +69,6 @@ const Scanner = (): React.ReactElement => {
           }}
         />
       )}
-
       {participent_name ? (
         <>
           <View
@@ -80,7 +83,7 @@ const Scanner = (): React.ReactElement => {
             >
               Name: {participent_name}
             </Text>
-            <Button
+            {/* <Button
               text={"Submit"}
               color={"#9F7AEA"}
               textStyle={{ color: "white" }}
@@ -91,7 +94,36 @@ const Scanner = (): React.ReactElement => {
                 marginTop: 32,
               }}
               onPress={registerParticipent}
-            />
+            /> */}
+            <TouchableOpacity
+              disabled={isloading}
+              onPress={registerParticipent}
+            >
+              <View
+                style={{
+                  backgroundColor: "#9F7AEA",
+                  borderRadius: 4,
+                  borderColor: "black",
+                  borderWidth: 1,
+                  marginTop: 32,
+                  paddingVertical: 10,
+                }}
+              >
+                {isloading ? (
+                  <ActivityIndicator size={"small"} color={"black"} />
+                ) : (
+                  <Text
+                    style={{
+                      textAlign: "center",
+                      color: "white",
+                      fontWeight: "800",
+                    }}
+                  >
+                    Submit
+                  </Text>
+                )}
+              </View>
+            </TouchableOpacity>
           </View>
         </>
       ) : null}
