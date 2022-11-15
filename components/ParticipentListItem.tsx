@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Avatar, Button } from "react-native-rapi-ui";
 import { AntDesign } from "@expo/vector-icons";
@@ -8,7 +8,9 @@ type ParticipentListItemProps = {
   email: string;
   p_id: string;
   showSheet: any;
-  setP_name:any;
+  setP_name: any;
+  setpid: any;
+  setmail: any;
 };
 
 const ParticipentListItem = ({
@@ -17,6 +19,8 @@ const ParticipentListItem = ({
   p_id,
   showSheet,
   setP_name,
+  setpid,
+  setmail
 }: ParticipentListItemProps): React.ReactElement => {
   return (
     <View
@@ -32,9 +36,11 @@ const ParticipentListItem = ({
         borderColor: "black",
         borderWidth: 1,
       }}
-      onTouchEndCapture={() => {
+      onTouchEnd={(e) => {
         showSheet((prev: any) => !prev);
-        setP_name(name)
+        setP_name(name);
+        setmail(email)
+        setpid(p_id);
       }}
     >
       <View style={{ display: "flex", flexDirection: "row" }}>

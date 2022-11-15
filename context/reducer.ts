@@ -10,7 +10,9 @@ export const initialState = {
 };
 export const actionTypes = {
   SET_PARTICIPENTS: "SET_PARTICIPENTS",
+  UPDATE_USERDATA: "UPDATE_USERDATA",
 };
+
 const reducer = (state: InitialState, action: ActionType) => {
   switch (action.type) {
     case actionTypes.SET_PARTICIPENTS:

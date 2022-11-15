@@ -16,6 +16,7 @@ const Scanner = (): React.ReactElement => {
   const [isScanned, setIsScanned] = useState<boolean>(false);
   const [participent_name, setParticipent_name] = useState<string>("");
   const [p_id, setP_id] = useState<string>("");
+  const [mail, setMail] = useState<string>("");
   const [isloading, setIsloading] = useState(false);
   const registerParticipent = async () => {
     try {
@@ -64,6 +65,7 @@ const Scanner = (): React.ReactElement => {
               console.log(data.data);
               setIsScanned((prev) => !prev);
               setParticipent_name(JSON.parse(data.data).name);
+              setMail(JSON.parse(data.data)?.email);
               setP_id(JSON.parse(data.data).participent_id);
             }
           }}
@@ -83,18 +85,14 @@ const Scanner = (): React.ReactElement => {
             >
               Name: {participent_name}
             </Text>
-            {/* <Button
-              text={"Submit"}
-              color={"#9F7AEA"}
-              textStyle={{ color: "white" }}
+            <Text
               style={{
-                borderRadius: 4,
-                borderColor: "black",
-                borderWidth: 1,
-                marginTop: 32,
+                marginVertical: 10,
+                fontSize: 20,
               }}
-              onPress={registerParticipent}
-            /> */}
+            >
+              Email: {mail}
+            </Text>
             <TouchableOpacity
               disabled={isloading}
               onPress={registerParticipent}
